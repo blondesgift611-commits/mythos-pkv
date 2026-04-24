@@ -29,7 +29,7 @@ const FAQS = [
   },
   {
     q: "Wie läuft eine Beratung bei Mythos PKV ab?",
-    a: "Erst Aufklärung, dann Analyse, dann Empfehlung, niemals umgekehrt. Kein Produkt ohne vollständiges Bild.",
+    a: "Erst Aufklärung, dann Analyse, dann Empfehlung, niemals umgekehrt. Deine Situation steht im Mittelpunkt, nicht das Produkt.",
   },
 ];
 
@@ -221,10 +221,10 @@ export default function MythosPKV() {
             20 Jahre Halbwissen.<br /><span style={{ fontStyle: "italic", color: "#b8933a" }}>Entkräftet.</span>
           </h2>
         </Fade>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "1px", background: "#1a1a1a" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "1px", background: "#1a1a1a", alignItems: "start" }}>
           {MYTHS.map((m, i) => (
             <Fade key={m.id} delay={i * 0.08}>
-              <div style={{ background: "#0a0a0a", padding: "2.5rem", position: "relative", overflow: "hidden" }}>
+              <div style={{ background: "#0a0a0a", padding: "2.5rem", position: "relative", overflow: "hidden", height: "100%", boxSizing: "border-box" }}>
                 <div style={{ position: "absolute", top: "1.5rem", right: "1.5rem", fontFamily: "'Cormorant Garamond', serif", fontSize: "4rem", fontWeight: 700, color: "#1a1a1a", lineHeight: 1 }}>0{m.id}</div>
                 <div style={{ fontSize: ".72rem", letterSpacing: ".15em", textTransform: "uppercase", color: "#5a5248", marginBottom: "1rem" }}>Mythos</div>
                 <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.25rem", color: "#9a9080", fontStyle: "italic", marginBottom: "1.2rem", textDecoration: "none" }}>
@@ -248,14 +248,14 @@ export default function MythosPKV() {
                 Kein Verkauf.<br />Erst <span style={{ fontStyle: "italic", color: "#b8933a" }}>Klarheit</span>.
               </h2>
               <p style={{ color: "#9a9080", lineHeight: 1.8, fontSize: ".95rem", fontWeight: 300, maxWidth: "420px" }}>
-                Wir erklären zuerst, was du wirklich verstehen musst, ohne versteckte Agenda. Die meisten Beratungen beginnen mit dem Produkt. Wir beginnen mit der Wahrheit.
+                Wir erklären zuerst, was du wirklich verstehen musst, ohne versteckte Agenda. Die meisten Beratungen beginnen mit dem Produkt. Wir beginnen mit Aufklärung.
               </p>
             </div>
           </Fade>
           <div style={{ display: "flex", flexDirection: "column", gap: "1px", background: "#1a1a1a" }}>
             {[
               { icon: "◈", label: "Mythen-Analyse", desc: "Wir zeigen dir, welche Glaubenssätze deiner Entscheidung im Weg stehen." },
-              { icon: "◇", label: "Tarifvergleich ohne Druck", desc: "Kein Produkt ohne vollständiges Bild. Niemals umgekehrt." },
+              { icon: "◇", label: "Tarifvergleich ohne Druck", desc: "Deine Situation steht im Mittelpunkt, nicht das Produkt. Niemals umgekehrt." },
               { icon: "◆", label: "Zukunftssicherheit", desc: "Altersrückstellungen, Beitragsentwicklung: die Themen, die alle verschweigen." },
               { icon: "◉", label: "Rückkehrfalle vermeiden", desc: "Wechselwillige treffen oft unumkehrbare Entscheidungen. Wir verhindern das." },
             ].map((b, i) => (
