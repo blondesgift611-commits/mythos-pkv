@@ -1,10 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
 
 function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.screen.width <= 430 || window.innerWidth <= 430;
+  });
   useEffect(() => {
-    const handler = () => setIsMobile(window.innerWidth <= 768);
+    // Inject viewport meta tag if missing
+    if (!document.querySelector('meta[name="viewport"]')) {
+      const meta = document.createElement("meta");
+      meta.name = "viewport";
+      meta.content = "width=device-width, initial-scale=1";
+      document.head.appendChild(meta);
+    }
+    const handler = () => setIsMobile(window.screen.width <= 430 || window.innerWidth <= 430);
     window.addEventListener("resize", handler);
+    handler();
     return () => window.removeEventListener("resize", handler);
   }, []);
   return isMobile;
@@ -246,10 +257,10 @@ export default function MythosPKV() {
             20 Jahre Halbwissen.<br /><span style={{ fontStyle: "italic", color: "#b8933a" }}>Entkräftet.</span>
           </h2>
         </Fade>
-        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)", gap: "1px", background: "#1a1a1a" }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)", gap: isMobile ? "0" : "1px", background: "#1a1a1a" }}>
           {MYTHS.map((m, i) => (
             <Fade key={m.id} delay={i * 0.08}>
-              <div style={{ background: "#0a0a0a", padding: "2.5rem", position: "relative", overflow: "hidden", height: "100%", boxSizing: "border-box" }}>
+              <div style={{ background: "#0a0a0a", padding: isMobile ? "1.5rem" : "2.5rem", position: "relative", overflow: "hidden" }}>
                 <div style={{ position: "absolute", top: "1.5rem", right: "1.5rem", fontFamily: "'Cormorant Garamond', serif", fontSize: "4rem", fontWeight: 700, color: "#1a1a1a", lineHeight: 1 }}>0{m.id}</div>
                 <div style={{ fontSize: ".72rem", letterSpacing: ".15em", textTransform: "uppercase", color: "#5a5248", marginBottom: "1rem" }}>Mythos</div>
                 <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.25rem", color: "#9a9080", fontStyle: "italic", marginBottom: "1.2rem", textDecoration: "none" }}>
@@ -563,4 +574,5 @@ export default function MythosPKV() {
     </>
   );
 }
+
 
