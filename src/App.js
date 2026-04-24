@@ -141,17 +141,17 @@ export default function MythosPKV() {
     .cta-btn-outline:hover { background: #b8933a; color:#0a0a0a; }
     @media (max-width: 768px) {
       .nav-desktop { display: none !important; }
-      .hero-section { padding: 7rem 1.2rem 3rem !important; min-height: auto !important; }
+      .hero-section { min-height: auto !important; padding: 5rem 1.2rem 2.5rem !important; }
       .hero-buttons { flex-direction: column !important; }
       .hero-buttons button, .hero-buttons a { width: 100% !important; text-align: center !important; box-sizing: border-box; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 1.5rem !important; padding: 2rem 1.2rem !important; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 1.2rem !important; padding: 1.8rem 1.2rem !important; }
       .myths-grid { grid-template-columns: 1fr !important; }
       .nutzen-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
       .testimonials-grid { grid-template-columns: 1fr !important; }
       .cta-box { padding: 2.5rem 1.2rem !important; }
       .form-name-row { grid-template-columns: 1fr !important; }
       .footer-inner { flex-direction: column !important; text-align: center !important; gap: 1rem !important; }
-      .modal-inner { padding: 1.5rem !important; margin: 1rem !important; }
+      .modal-inner { padding: 1.5rem !important; margin: 1rem !important; max-height: 90vh !important; }
     }
   `;
 
@@ -174,7 +174,7 @@ export default function MythosPKV() {
       </nav>
 
       {/* HERO */}
-      <section style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "7rem 1.2rem 3rem", maxWidth: "1100px", margin: "0 auto", position: "relative" }}>
+      <section className="hero-section" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "7rem 1.2rem 3rem", maxWidth: "1100px", margin: "0 auto", position: "relative" }}>
         {/* Background accent */}
         <div style={{ position: "absolute", top: "20%", right: "0", width: "40%", height: "60%", background: "radial-gradient(ellipse at right, rgba(184,147,58,.06), transparent 70%)", pointerEvents: "none" }} />
         <div style={{ position: "absolute", top: "10%", left: "-5%", width: "1px", height: "80%", background: "linear-gradient(to bottom,transparent,#b8933a33,transparent)", animation: "pulse-border 3s ease infinite" }} />
@@ -235,7 +235,7 @@ export default function MythosPKV() {
             20 Jahre Halbwissen.<br /><span style={{ fontStyle: "italic", color: "#b8933a" }}>Entkräftet.</span>
           </h2>
         </Fade>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1px", background: "#1a1a1a" }} className="myths-grid">
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))", gap: "1px", background: "#1a1a1a" }} className="myths-grid">
           {MYTHS.map((m, i) => (
             <Fade key={m.id} delay={i * 0.08}>
               <div style={{ background: "#0a0a0a", padding: "2.5rem", position: "relative", overflow: "hidden", height: "100%", boxSizing: "border-box" }}>
