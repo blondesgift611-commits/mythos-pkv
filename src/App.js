@@ -221,7 +221,7 @@ export default function MythosPKV() {
             20 Jahre Halbwissen.<br /><span style={{ fontStyle: "italic", color: "#b8933a" }}>Entkräftet.</span>
           </h2>
         </Fade>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "1px", background: "#1a1a1a", alignItems: "start" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1px", background: "#1a1a1a" }}>
           {MYTHS.map((m, i) => (
             <Fade key={m.id} delay={i * 0.08}>
               <div style={{ background: "#0a0a0a", padding: "2.5rem", position: "relative", overflow: "hidden", height: "100%", boxSizing: "border-box" }}>
