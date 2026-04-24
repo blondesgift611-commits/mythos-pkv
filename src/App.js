@@ -172,35 +172,35 @@ export default function MythosPKV() {
       <div className="grain" />
 
       {/* NAV */}
-      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, padding: "1.4rem 2rem", display: "flex", justifyContent: "space-between", alignItems: "center", background: "linear-gradient(to bottom,rgba(10,10,10,.95),transparent)", backdropFilter: "blur(12px)" }}>
+      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, padding: isMobile ? "1rem 1.2rem" : "1.4rem 2rem", display: "flex", justifyContent: "space-between", alignItems: "center", background: "linear-gradient(to bottom,rgba(10,10,10,.95),transparent)", backdropFilter: "blur(12px)" }}>
         <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.35rem", fontWeight: 700, letterSpacing: ".04em", color: "#f0ebe0" }}>
           MYTHOS <span style={{ color: "#b8933a" }}>PKV</span>
         </div>
-        <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
-          <button onClick={() => document.getElementById("mythen").scrollIntoView({behavior:"smooth"})} className="nav-link" style={{background:"none",border:"none",cursor:"pointer"}}>Mythen</button>
+        <div style={{ display: "flex", gap: "1.5rem", alignItems: "center" }}>
+          {!isMobile && <><button onClick={() => document.getElementById("mythen").scrollIntoView({behavior:"smooth"})} className="nav-link" style={{background:"none",border:"none",cursor:"pointer"}}>Mythen</button>
           <button onClick={() => document.getElementById("nutzen").scrollIntoView({behavior:"smooth"})} className="nav-link" style={{background:"none",border:"none",cursor:"pointer"}}>Nutzen</button>
-          <button onClick={() => document.getElementById("faq").scrollIntoView({behavior:"smooth"})} className="nav-link" style={{background:"none",border:"none",cursor:"pointer"}}>FAQ</button>
-          <button onClick={() => document.getElementById("kontakt").scrollIntoView({behavior:"smooth"})} className="cta-btn-outline" style={{padding:".55rem 1.4rem",fontSize:".82rem"}}>Gespräch anfragen</button>
+          <button onClick={() => document.getElementById("faq").scrollIntoView({behavior:"smooth"})} className="nav-link" style={{background:"none",border:"none",cursor:"pointer"}}>FAQ</button></> }
+          <button onClick={() => document.getElementById("kontakt").scrollIntoView({behavior:"smooth"})} className="cta-btn-outline" style={{padding:".55rem 1.4rem",fontSize:isMobile?".75rem":".82rem"}}>Gespräch anfragen</button>
         </div>
       </nav>
 
       {/* HERO */}
-      <section style={{ minHeight: isMobile ? "auto" : "100vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: isMobile ? "5rem 1.2rem 2.5rem" : "8rem 2rem 5rem", maxWidth: "1100px", margin: "0 auto", position: "relative" }}>
+      <section style={{ display: "flex", flexDirection: "column", justifyContent: "flex-start", padding: isMobile ? "5rem 1.2rem 3rem" : "10rem 2rem 5rem", maxWidth: "1100px", margin: "0 auto", position: "relative" }}>
         {/* Background accent */}
-        <div style={{ position: "absolute", top: "20%", right: "0", width: "40%", height: "60%", background: "radial-gradient(ellipse at right, rgba(184,147,58,.06), transparent 70%)", pointerEvents: "none" }} />
-        <div style={{ position: "absolute", top: "10%", left: "-5%", width: "1px", height: "80%", background: "linear-gradient(to bottom,transparent,#b8933a33,transparent)", animation: "pulse-border 3s ease infinite" }} />
+        {!isMobile && <div style={{ position: "absolute", top: "20%", right: "0", width: "40%", height: "60%", background: "radial-gradient(ellipse at right, rgba(184,147,58,.06), transparent 70%)", pointerEvents: "none" }} />}
+        {!isMobile && <div style={{ position: "absolute", top: "10%", left: "-5%", width: "1px", height: "80%", background: "linear-gradient(to bottom,transparent,#b8933a33,transparent)", animation: "pulse-border 3s ease infinite" }} />}
 
-        <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: ".78rem", letterSpacing: ".2em", textTransform: "uppercase", color: "#b8933a", marginBottom: "2rem", opacity: .9 }}>
+        <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: ".72rem", letterSpacing: ".15em", textTransform: "uppercase", color: "#b8933a", marginBottom: isMobile ? "1rem" : "2rem", opacity: .9 }}>
           ⬡ PKV verstehen. Richtig entscheiden.
         </div>
 
-        <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(3rem, 7vw, 6.5rem)", fontWeight: 700, lineHeight: 1.02, color: "#f0ebe0", marginBottom: "1.8rem", maxWidth: "860px" }}>
+        <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: isMobile ? "2.8rem" : "clamp(3rem, 7vw, 6.5rem)", fontWeight: 700, lineHeight: 1.05, color: "#f0ebe0", marginBottom: isMobile ? "1rem" : "1.8rem", maxWidth: "860px" }}>
           Was alle über<br />
           <span style={{ fontStyle: "italic", color: "#b8933a" }}>PKV glauben</span>
           <br />stimmt so nicht.
         </h1>
 
-        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(1rem, 2vw, 1.2rem)", color: "#9a9080", maxWidth: "520px", lineHeight: 1.8, marginBottom: "2.8rem", fontWeight: 300 }}>
+        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: isMobile ? "1rem" : "1.1rem", color: "#9a9080", maxWidth: "520px", lineHeight: 1.7, marginBottom: isMobile ? "1.5rem" : "2.8rem", fontWeight: 300 }}>
           Wir von Mythos PKV bringen Ordnung in das Thema, das die meisten falsch verstehen. Bevor sie eine Entscheidung treffen, die sie nicht mehr rückgängig machen können.
         </p>
 
