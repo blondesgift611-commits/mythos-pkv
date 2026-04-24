@@ -1,5 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  useEffect(() => {
+    const handler = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, []);
+  return isMobile;
+}
+
 const MYTHS = [
   { id: 1, myth: "PKV ist nur für Reiche.", reality: "Stimmt so nicht. Angestellte brauchen ein Einkommen oberhalb der Jahresarbeitsentgeltgrenze, Selbstständige und Beamte können unabhängig davon in die PKV." },
   { id: 2, myth: "Im Alter wird PKV unbezahlbar.", reality: "Mit Altersrückstellungen und richtiger Tarifwahl bleibt die Prämie stabil. Das verschweigt der Markt." },
@@ -80,6 +90,7 @@ function FAQItem({ q, a }) {
 }
 
 export default function MythosPKV() {
+  const isMobile = useIsMobile();
   const [form, setForm] = useState({ vorname: "", nachname: "", telefon: "", email: "" });
   const [submitted, setSubmitted] = useState(false);
   const [showImpressum, setShowImpressum] = useState(false);
@@ -174,7 +185,7 @@ export default function MythosPKV() {
       </nav>
 
       {/* HERO */}
-      <section className="hero-section" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "7rem 1.2rem 3rem", maxWidth: "1100px", margin: "0 auto", position: "relative" }}>
+      <section style={{ minHeight: isMobile ? "auto" : "100vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: isMobile ? "5rem 1.2rem 2.5rem" : "8rem 2rem 5rem", maxWidth: "1100px", margin: "0 auto", position: "relative" }}>
         {/* Background accent */}
         <div style={{ position: "absolute", top: "20%", right: "0", width: "40%", height: "60%", background: "radial-gradient(ellipse at right, rgba(184,147,58,.06), transparent 70%)", pointerEvents: "none" }} />
         <div style={{ position: "absolute", top: "10%", left: "-5%", width: "1px", height: "80%", background: "linear-gradient(to bottom,transparent,#b8933a33,transparent)", animation: "pulse-border 3s ease infinite" }} />
@@ -193,7 +204,7 @@ export default function MythosPKV() {
           Wir von Mythos PKV bringen Ordnung in das Thema, das die meisten falsch verstehen. Bevor sie eine Entscheidung treffen, die sie nicht mehr rückgängig machen können.
         </p>
 
-        <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }} className="hero-buttons">
+        <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: "1rem" }}>
           <button onClick={() => document.getElementById("kontakt").scrollIntoView({behavior:"smooth"})} className="cta-btn">Kostenloses Gespräch</button>
           <button onClick={() => document.getElementById("mythen").scrollIntoView({behavior:"smooth"})} className="cta-btn-outline">Die Mythen ansehen</button>
         </div>
@@ -215,7 +226,7 @@ export default function MythosPKV() {
 
       {/* STATS BAR */}
       <div style={{ borderTop: "1px solid #1a1a1a", borderBottom: "1px solid #1a1a1a", background: "#0d0d0d" }}>
-        <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "2.5rem 2rem", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "2rem" }} className="stats-grid">
+        <div style={{ maxWidth: "1100px", margin: "0 auto", padding: isMobile ? "2rem 1.2rem" : "2.5rem 2rem", display: "grid", gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(auto-fit, minmax(180px, 1fr))", gap: isMobile ? "1.2rem" : "2rem" }}>
           {STATS.map((s, i) => (
             <Fade key={i} delay={i * 0.1}>
               <div style={{ textAlign: "center" }}>
@@ -228,14 +239,14 @@ export default function MythosPKV() {
       </div>
 
       {/* MYTHEN SECTION */}
-      <section id="mythen" style={{ maxWidth: "1100px", margin: "0 auto", padding: "clamp(3rem, 8vw, 7rem) clamp(1.2rem, 4vw, 2rem)" }}>
+      <section id="mythen" style={{ maxWidth: "1100px", margin: "0 auto", padding: isMobile ? "3rem 1.2rem" : "7rem 2rem" }}>
         <Fade>
           <div style={{ fontFamily: "'DM Sans'", fontSize: ".75rem", letterSpacing: ".18em", textTransform: "uppercase", color: "#b8933a", marginBottom: "1rem" }}>⬡ Die häufigsten Irrtümer</div>
           <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.2rem, 5vw, 3.8rem)", fontWeight: 700, color: "#f0ebe0", maxWidth: "600px", lineHeight: 1.1, marginBottom: "4rem" }}>
             20 Jahre Halbwissen.<br /><span style={{ fontStyle: "italic", color: "#b8933a" }}>Entkräftet.</span>
           </h2>
         </Fade>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))", gap: "1px", background: "#1a1a1a" }} className="myths-grid">
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)", gap: "1px", background: "#1a1a1a" }}>
           {MYTHS.map((m, i) => (
             <Fade key={m.id} delay={i * 0.08}>
               <div style={{ background: "#0a0a0a", padding: "2.5rem", position: "relative", overflow: "hidden", height: "100%", boxSizing: "border-box" }}>
@@ -254,7 +265,7 @@ export default function MythosPKV() {
 
       {/* NUTZEN / BENEFITS */}
       <section id="nutzen" style={{ background: "#0d0d0d", borderTop: "1px solid #1a1a1a", borderBottom: "1px solid #1a1a1a" }}>
-        <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "clamp(3rem, 8vw, 7rem) clamp(1.2rem, 4vw, 2rem)", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "3rem", alignItems: "start" }} className="nutzen-grid">
+        <div style={{ maxWidth: "1100px", margin: "0 auto", padding: isMobile ? "3rem 1.2rem" : "7rem 2rem", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "2rem" : "5rem", alignItems: "start" }}>
           <Fade>
             <div>
               <div style={{ fontFamily: "'DM Sans'", fontSize: ".75rem", letterSpacing: ".18em", textTransform: "uppercase", color: "#b8933a", marginBottom: "1rem" }}>⬡ Warum Mythos PKV</div>
@@ -288,7 +299,7 @@ export default function MythosPKV() {
       </section>
 
       {/* SOCIAL PROOF */}
-      <section style={{ maxWidth: "1100px", margin: "0 auto", padding: "clamp(3rem, 8vw, 7rem) clamp(1.2rem, 4vw, 2rem)" }}>
+      <section style={{ maxWidth: "1100px", margin: "0 auto", padding: isMobile ? "3rem 1.2rem" : "7rem 2rem" }}>
         <Fade>
           <div style={{ textAlign: "center", marginBottom: "4rem" }}>
             <div style={{ fontFamily: "'DM Sans'", fontSize: ".75rem", letterSpacing: ".18em", textTransform: "uppercase", color: "#b8933a", marginBottom: "1rem" }}>⬡ Stimmen aus der Community</div>
@@ -297,7 +308,7 @@ export default function MythosPKV() {
             </h2>
           </div>
         </Fade>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1px", background: "#1a1a1a" }} className="testimonials-grid">
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: "1px", background: "#1a1a1a" }}>
           {[
             { name: "Markus T.", role: "Selbstständiger Architekt, 38", quote: "Ich dachte, PKV ist für mich zu riskant. Nach dem Gespräch mit Mythos PKV wusste ich, dass es genau das Gegenteil ist. Ich hätte 3 Jahre früher wechseln sollen." },
             { name: "Sarah K.", role: "Ärztin in Weiterbildung, 31", quote: "Endlich jemand, der mir erklärt hat, was Altersrückstellungen wirklich bedeuten. Ohne Druck. Ohne Produkt zuerst. Das hat mich überzeugt." },
@@ -318,7 +329,7 @@ export default function MythosPKV() {
 
       {/* FAQ */}
       <section id="faq" style={{ background: "#0d0d0d", borderTop: "1px solid #1a1a1a" }}>
-        <div style={{ maxWidth: "780px", margin: "0 auto", padding: "clamp(3rem, 8vw, 7rem) clamp(1.2rem, 4vw, 2rem)" }}>
+        <div style={{ maxWidth: "780px", margin: "0 auto", padding: isMobile ? "3rem 1.2rem" : "7rem 2rem" }}>
           <Fade>
             <div style={{ fontFamily: "'DM Sans'", fontSize: ".75rem", letterSpacing: ".18em", textTransform: "uppercase", color: "#b8933a", marginBottom: "1rem" }}>⬡ Häufige Fragen</div>
             <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 700, color: "#f0ebe0", marginBottom: "3rem", lineHeight: 1.15 }}>
@@ -334,8 +345,8 @@ export default function MythosPKV() {
       </section>
 
       {/* CTA / LEAD GEN */}
-      <section id="kontakt" style={{ maxWidth: "1100px", margin: "0 auto", padding: "clamp(3rem, 8vw, 7rem) clamp(1.2rem, 4vw, 2rem)" }}>
-        <div style={{ position: "relative", background: "#0d0d0d", border: "1px solid #1a1a1a", padding: "clamp(2rem, 5vw, 5rem) clamp(1.2rem, 4vw, 4rem)", overflow: "hidden" }}>
+      <section id="kontakt" style={{ maxWidth: "1100px", margin: "0 auto", padding: isMobile ? "3rem 1.2rem" : "7rem 2rem" }}>
+        <div style={{ position: "relative", background: "#0d0d0d", border: "1px solid #1a1a1a", padding: isMobile ? "2.5rem 1.2rem" : "5rem 4rem", overflow: "hidden" }}>
           <div style={{ position: "absolute", top: 0, right: 0, width: "50%", height: "100%", background: "radial-gradient(ellipse at right top, rgba(184,147,58,.07), transparent 60%)", pointerEvents: "none" }} />
           <div style={{ position: "absolute", bottom: "2rem", left: "2rem", fontFamily: "'Cormorant Garamond', serif", fontSize: "10rem", fontWeight: 700, color: "#111", lineHeight: 1, userSelect: "none" }}>?</div>
 
@@ -405,11 +416,11 @@ export default function MythosPKV() {
 
       {/* FOOTER */}
       <footer style={{ borderTop: "1px solid #1a1a1a", background: "#080808" }}>
-        <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "2rem 1.2rem", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto", padding: isMobile ? "1.5rem 1.2rem" : "3rem 2rem", display: "flex", flexDirection: isMobile ? "column" : "row", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem", textAlign: isMobile ? "center" : "left" }}>
           <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem", fontWeight: 700, color: "#f0ebe0" }}>
             MYTHOS <span style={{ color: "#b8933a" }}>PKV</span>
           </div>
-          <div style={{ display: "flex", gap: "2rem", flexWrap: "wrap" }} className="nav-desktop">
+          <div style={{ display: isMobile ? "none" : "flex", gap: "2rem", flexWrap: "wrap" }}>
             <button onClick={() => setShowImpressum(true)} className="nav-link" style={{ background: "none", border: "none", cursor: "pointer" }}>Impressum</button>
             <button onClick={() => setShowDatenschutz(true)} className="nav-link" style={{ background: "none", border: "none", cursor: "pointer" }}>Datenschutz</button>
           </div>
@@ -552,3 +563,4 @@ export default function MythosPKV() {
     </>
   );
 }
+
