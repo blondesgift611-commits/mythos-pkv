@@ -29,10 +29,10 @@ const MYTHS = [
 ];
 
 const STATS = [
-  { value: "11.3 Mio", label: "Privatversicherte in Deutschland" },
+  { value: "8,75 Mio", label: "Privatversicherte in Deutschland" },
   { value: "73%", label: "unterschätzen Tarifunterschiede" },
-  { value: "€ 847", label: "Ø monatliche Ersparnis vs. GKV möglich" },
-  { value: "1 von 3", label: "wechselt in den falschen Tarif" },
+  { value: "€ 300*", label: "Ø monatliche Ersparnis möglich (Einzelperson, 35 J.)" },
+  { value: "2 von 3", label: "wechseln in den falschen Tarif" },
 ];
 
 const FAQS = [
@@ -574,5 +574,3 @@ export default function MythosPKV() {
     </>
   );
 }
-
-
